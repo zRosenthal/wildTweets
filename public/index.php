@@ -40,20 +40,20 @@ $app->get('/app', function () use ($app) {
     //consumer key for twitter api
     $consumerKey = "gtLtHSelqhVRiO7v7vkSiLTUE";
 
-    $encodedConsumerKey = urlencode($consumerKey);
-
     //consumer secret for twitter api
     $consumerSecret = "AeAANUAAY90B2iKGPg7uR8ChP9BBPpZAoX2Vten7bqLHWELqaF";
 
-    $encodedConsumerSecret = urlencode($consumerSecret);
-
+    //create new OAuth connection
     $connection = new TwitterOAuth($consumerKey, $consumerSecret);
-    $request_token = $connection->oauth("oauth/request_token", array("oauth_callback" => "/twitter"));
-    //callback is set to where the rest of the script is
 
+    //request bearer token
+    $request_token = $connection->oauth("oauth/request_token");
+
+    //get tokens
     $oauth_token=$request_token['oauth_token'];
     $token_secret=$request_token['oauth_token_secret'];
 
+    //log tokens for debug
     $app->log->info("Oath token: " .$oauth_token ."\n token_secret: " . $token_secret ."\n");
 
 });
