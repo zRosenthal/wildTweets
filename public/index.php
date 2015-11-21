@@ -8,7 +8,7 @@ $app = new \Slim\Slim(array(
     'templates.path' => '../templates',
 ));
 
-// Create monolog logger and store logger in container as singleton 
+// Create monolog logger and store logger in container as singleton
 // (Singleton resources retrieve the same log resource definition each time)
 $app->container->singleton('log', function () {
     $log = new \Monolog\Logger('slim-skeleton');
@@ -35,31 +35,46 @@ $app->get('/', function () use ($app) {
     $app->render('index.html');
 });
 
+$app->get('/callback', function () use ($app) {
+
+    $app->log->info("here");
+
+});
+
+
 $app->get('/app', function () use ($app) {
 
     //consumer key for twitter api
-    $consumerKey = "gtLtHSelqhVRiO7v7vkSiLTUE";
+    $consumerKey = "4eb9kZcRB4KZf9p6Pp4dxeN1W";
 
     //consumer secret for twitter api
-    $consumerSecret = "AeAANUAAY90B2iKGPg7uR8ChP9BBPpZAoX2Vten7bqLHWELqaF";
+    $consumerSecret = "xfTRGk2xK7y0QeQ9PjoCB6rTrBWgYpNQL2y9tTigetN1Ftsl4Y";
 
     //create new OAuth connection
     $connection = new TwitterOAuth($consumerKey, $consumerSecret);
 
     //request bearer token
-    $request_token = $connection->oauth("oauth/request_token");
+    $request_token = $connection->oauth2("oauth2/token", array("oauth_callback" => "http://wildTweets.dev/callback", "grant_type" =>"client_credentials"));
 
-    //get tokens
-    $oauth_token=$request_token['oauth_token'];
-    $token_secret=$request_token['oauth_token_secret'];
+    $app->log->info(json_encode($request_token));
+
+    //get
+    $oauth_token=$request_token->access_token;
+
+    $app->log->info("hello world");
 
     //log tokens for debug
-    $app->log->info("Oath token: " .$oauth_token ."\n token_secret: " . $token_secret ."\n");
+    $app->log->info("Oath token: " . $oauth_token);
 
-    $connection = new TwitterOAuth($consumerKey, $consumerSecret, $oauth_token, $token_secret);
-    $content = $connection->get("account/verify_credentials");
+    $connection = new TwitterOAuth($consumerKey, $consumerSecret, null, $oauth_token);
+    $app->log->info(json_encode($connection));
 
-    $app->log->info(json_encode($content));
+    $result = $connection->get('statuses/user_timeline', array('screen_name' => 'twitterapi'));
+    if ($connection->getLastHttpCode() !== 200) {
+        $app->log->info("error");
+    }
+
+    $app->log->info(json_encode($result));
 });
 
 
