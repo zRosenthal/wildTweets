@@ -56,7 +56,12 @@ $app->get('/app', function () use ($app) {
     //log tokens for debug
     $app->log->info("Oath token: " .$oauth_token ."\n token_secret: " . $token_secret ."\n");
 
+    $connection = new TwitterOAuth($consumerKey, $consumerSecret, $oauth_token, $token_secret);
+    $content = $connection->get("account/verify_credentials");
+
+    $app->log->info(json_encode($content));
 });
+
 
 
 // Run app
