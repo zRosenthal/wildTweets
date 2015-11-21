@@ -1,6 +1,8 @@
 <?php
 require '../vendor/autoload.php';
 
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 // Prepare app
 $app = new \Slim\Slim(array(
     'templates.path' => '../templates',
@@ -35,7 +37,24 @@ $app->get('/', function () use ($app) {
 
 $app->get('/app', function () use ($app) {
 
+    //consumer key for twitter api
+    $consumerKey = "gtLtHSelqhVRiO7v7vkSiLTUE";
 
+    $encodedConsumerKey = urlencode($consumerKey);
+
+    //consumer secret for twitter api
+    $consumerSecret = "AeAANUAAY90B2iKGPg7uR8ChP9BBPpZAoX2Vten7bqLHWELqaF";
+
+    $encodedConsumerSecret = urlencode($consumerSecret);
+
+    $connection = new TwitterOAuth($consumerKey, $consumerSecret);
+    $request_token = $connection->oauth("oauth/request_token", array("oauth_callback" => "/twitter"));
+    //callback is set to where the rest of the script is
+
+    $oauth_token=$request_token['oauth_token'];
+    $token_secret=$request_token['oauth_token_secret'];
+
+    $app->log->info("Oath token: " .$oauth_token ."\n token_secret: " . $token_secret ."\n");
 
 });
 
