@@ -60,7 +60,6 @@ class HPESentimentWrapper {
             }
             if($sentimentVal == 0)
             {
-                echo "hack" . $twat . "<br><br>";
                 $size = $size-1;
             }
             $sum = $sum + $sentimentVal;

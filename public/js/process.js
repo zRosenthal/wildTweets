@@ -5,20 +5,24 @@
 function process() {
     var query = document.getElementById("query").value;
 
-    queueFlyingMonkey(monkey);
+
 
     var dataH = $('#display_header');
 
     $.ajax({
-        url: '/process/'. query,
+        url: '/process/'+ query,
         method: 'get',
         success: function (data) {
-
+            $("#cat_text").hide();
+            dataH.show();
+            console.log(data);
             dataH.html(data);
 
         }
 
     });
+
+   queueFlyingMonkey(monkey);
 
 }
 function queueFlyingMonkey() {
@@ -32,8 +36,6 @@ function queueFlyingMonkey() {
     var text = $("#cat_text");
 
     animateInit(monkey, twitter, hp, text);
-
-    animate0(monkey, twitter, hp, text);
 
 }
 
@@ -109,6 +111,8 @@ function animateInit(monkey, twitter, hp, text) {
 
                     hp.hide();
 
+                    text.hide();
+
                     var monkeyH = monkey.height();
 
                     var monkeyW = monkey.width()
@@ -131,7 +135,11 @@ function animateInit(monkey, twitter, hp, text) {
                         height: "+="+H,
                         left: "-="+monkeyPosition.left,
                         top: "-="+monkeyPosition.top
-                    }, 5000, function() {});
+                    }, 5000, function() {
+
+                        text.html("Space Cat is crunching the datag");
+
+                    });
 
                 }
             );

@@ -32,17 +32,18 @@ $app->view->parserExtensions = array(new \Slim\Views\TwigExtension());
 // Define routes
 $app->get('/', function () use ($app) {
     // Sample log message
-    $app->log->info("Slim-Skeleton '/' route");
     // Render index view
     $app->render('index.html');
 });
 
 
 $app->get('/process/:keyword', function ($keyword) use ($app) {
+    $app->log->info("here");
     $twitter = new TwitterRequest();
     $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword  -http -filter:retweets -filter:links -filter:replies -filter:images lang:en", 'result_type' => 'recent', 'count' => 20, 'exclude_replies' => true));
     $sentimentAnalyzer = new HPESentimentWrapper();
     $sentimentAverage = $sentimentAnalyzer->GetSentimentAverageForTweets($tweets);
+    $app->log->info("sentimentDone: " .$sentimentAverage);
     echo $sentimentAverage;
 
 });
