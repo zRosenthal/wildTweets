@@ -40,7 +40,7 @@ $app->get('/', function () use ($app) {
 
 $app->get('/process/:keyword', function ($keyword) use ($app) {
     $twitter = new TwitterRequest();
-    $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword -filter:retweets", 'result_type' => 'popular', 'count' => 100));
+    $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword -filter:retweets", 'result_type' => 'recent', 'count' => 100));
     $sentimentAnalyzer = new HPESentimentWrapper();
     $sentimentAverage = $sentimentAnalyzer->GetSentimentAverageForTweets($tweets);
     echo $sentimentAverage;
