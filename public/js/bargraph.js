@@ -49,11 +49,8 @@ function bargraph($data) {
             },
 
             series: [{
-                name: 'Positive',
-                data: []
-            }, {
                 name: 'Negative',
-                data: [2.1]
+                data: [-90]
             }]
         });
 
