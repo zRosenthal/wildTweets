@@ -38,15 +38,15 @@ function makeRequest(query,date1, date2) {
                 $("#cat_text").hide();
                 console.log(data);
                 //dataH.html(data);
-                addPoint(parseFloat(data));
+                addPoint(parseFloat(data),date1);
 
 
         }
     });
 
 }
-function addPoint(data) {
-    $('#bar-graph').highcharts().series[0].addPoint(data);
+function addPoint(data,date) {
+    $('#bar-graph').highcharts().series[0].addPoint([date,data]);
 }
 
 function getCurrentDate() {
