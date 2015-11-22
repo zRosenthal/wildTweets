@@ -23,7 +23,7 @@ function animateInit(monkey, twitter, hp, text) {
         height: "-="+H,
         left: "+="+left,
         top: "+="+top
-    }, 5000, function() {
+    }, 4000, function() {
 
         monkey.css('z-index', 1);
 
@@ -45,7 +45,7 @@ function animateInit(monkey, twitter, hp, text) {
         monkey.animate({
             left: "+="+left,
             top: "+="+top
-        }, 5000, function() {
+        }, 4000, function() {
 
             twitter.hide();
 
@@ -65,7 +65,7 @@ function animateInit(monkey, twitter, hp, text) {
             monkey.animate({
                     left: "+="+left,
                     top: "+="+top
-                }, 5000, function() {
+                }, 4000, function() {
 
                     hp.hide();
 
@@ -93,7 +93,7 @@ function animateInit(monkey, twitter, hp, text) {
                         height: "+="+H,
                         left: "-="+monkeyPosition.left,
                         top: "-="+monkeyPosition.top
-                    }, 5000, function() {
+                    }, 4000, function() {
 
                         text.html("Space Cat is crunching the data");
 
