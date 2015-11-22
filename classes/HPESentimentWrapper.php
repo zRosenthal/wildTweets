@@ -15,6 +15,7 @@ class HPESentimentWrapper {
         $correctText = str_replace(" ","+",$text);
         $query = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text="
                     . $correctText . "&language=eng&apikey=" . self::APIKEY;
+        echo $query;
         // create curl resource
         $ch = curl_init();
 
