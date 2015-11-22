@@ -1,17 +1,6 @@
 function process(count) {
     var query = document.getElementById("query").value;
 
-    if(count == 20) {
-        console.log(count);
-        process(60);
-        queueFlyingMonkey();
-    } else if(count < 200) {
-        console.log(count);
-        process(count + 10);
-    }
-
-
-
     var dataH = $('#display_header');
 
     $.ajax({
