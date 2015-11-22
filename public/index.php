@@ -66,7 +66,10 @@ $app->get('/twitterTest', function () use ($app) {
 $app->get('/sentimentTest', function () use ($app) {
 
     $HPE = new HPESentimentWrapper();
-    echo $HPE->GetSentimentJson("I really fucking hate my mother");
+
+    $vala = $HPE->GetSentimentValue("I really fucking hate my mother");
+    $valb = $HPE->GetSentimentValue("I really love my mother");
+    echo $vala. " " . $valb . "<br>".($vala+$valb)/2;
 
 });
 
