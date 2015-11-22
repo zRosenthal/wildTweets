@@ -40,7 +40,7 @@ $app->get('/', function () use ($app) {
 $app->get('/process/:keyword/:count', function ($keyword, $count) use ($app) {
     $app->log->info("here");
     $twitter = new TwitterRequest();
-    $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword  -http -filter:retweets -filter:links -filter:replies -filter:images lang:en", 'result_type' => 'recent', 'count' => $count, 'exclude_replies' => true));
+    $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword  -http -filter:retweets -filter:links -filter:replies -filter:images since:2015-11-17 until:2015-11-18 lang:en", 'result_type' => 'recent', 'count' => $count, 'exclude_replies' => true));
     $sentimentAnalyzer = new HPESentimentWrapper();
     $sentimentAverage = $sentimentAnalyzer->GetSentimentAverageForTweets($tweets);
     $app->log->info("sentimentDone: " .$sentimentAverage);
