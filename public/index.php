@@ -41,7 +41,7 @@ $app->get('/', function () use ($app) {
 
 $app->get('/twitterTest', function () use ($app) {
 
-    $correctText = str_replace(" ","+",$text);
+
     $query = 'https://google.com';
     // create curl resource
     $ch = curl_init();
