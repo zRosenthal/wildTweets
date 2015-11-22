@@ -41,23 +41,11 @@ $app->get('/', function () use ($app) {
 
 $app->get('/twitterTest', function () use ($app) {
 
+    $twitter = new TwitterRequest();
+    $app->log->info(json_encode($twitter));
+    $tweets = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent', 'count' => 2));
 
-    $query = 'https://www.google.com';
-    // create curl resource
-    $ch = curl_init();
-
-    // set url
-    curl_setopt($ch, CURLOPT_URL, $query);
-
-    //return the transfer as a string
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-    // $output contains the output string
-    $output = curl_exec($ch);
-
-    // close curl resource to free up system resources
-    curl_close($ch);
-    echo $output;
+    echo json_encode($tweets);
 
 });
 
