@@ -1,5 +1,6 @@
 <?php
 require '../vendor/autoload.php';
+require '../public/TwitterRequest.php';
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -44,37 +45,10 @@ $app->get('/callback', function () use ($app) {
 
 $app->get('/app', function () use ($app) {
 
-    //consumer key for twitter api
-    $consumerKey = "4eb9kZcRB4KZf9p6Pp4dxeN1W";
-
-    //consumer secret for twitter api
-    $consumerSecret = "xfTRGk2xK7y0QeQ9PjoCB6rTrBWgYpNQL2y9tTigetN1Ftsl4Y";
-
-    //create new OAuth connection
-    $connection = new TwitterOAuth($consumerKey, $consumerSecret);
-
-    //request bearer token
-    $request_token = $connection->oauth2("oauth2/token", array("oauth_callback" => "http://wildTweets.dev/callback", "grant_type" =>"client_credentials"));
-
-    $app->log->info(json_encode($request_token));
-
-    //get
-    $oauth_token=$request_token->access_token;
-
-    $app->log->info("hello world");
-
-    //log tokens for debug
-    $app->log->info("Oath token: " . $oauth_token);
-
-    $connection = new TwitterOAuth($consumerKey, $consumerSecret, null, $oauth_token);
-    $app->log->info(json_encode($connection));
-
-    $result = $connection->get('statuses/user_timeline', array('screen_name' => 'twitterapi'));
-    if ($connection->getLastHttpCode() !== 200) {
-        $app->log->info("error");
-    }
-
-    $app->log->info(json_encode($result));
+    $twitter = new TwitterRequest();
+    $app->log->info(json_encode($twitter));
+    $return = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent'));
+    $app->log->info(json_encode($return));
 });
 
 
