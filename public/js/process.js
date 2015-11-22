@@ -1,16 +1,24 @@
-/**
- * Created by zacharyrosenthal on 11/21/15.
- */
-
-function process() {
+function process(count) {
     var query = document.getElementById("query").value;
+
+    if(count == 20) {
+        console.log(count);
+        process(60);
+        queueFlyingMonkey();
+    } else if(count == 60) {
+        console.log(count);
+        process(120);
+    } else if(count == 120) {
+        console.log(count);
+        process(200);
+    }
 
 
 
     var dataH = $('#display_header');
 
     $.ajax({
-        url: '/process/'+ query,
+        url: '/process/'+ query +'/'+ count,
         method: 'get',
         success: function (data) {
             $("#cat_text").hide();
@@ -18,13 +26,9 @@ function process() {
             console.log(data);
             //dataH.html(data);
             bargraph(data);
-
         }
 
-    });
-
-   queueFlyingMonkey();
-
+    })
 }
 function queueFlyingMonkey() {
 
