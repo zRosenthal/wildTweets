@@ -23,7 +23,7 @@ function process() {
 
     });
 
-   queueFlyingMonkey(monkey);
+   queueFlyingMonkey();
 
 }
 function queueFlyingMonkey() {
