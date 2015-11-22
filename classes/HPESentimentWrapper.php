@@ -20,6 +20,7 @@ class HPESentimentWrapper {
         $correctText = preg_replace("/[^a-zA-Z0-9+]/", "", $correctText);
         $query = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text="
                     . $correctText . "&language=eng&apikey=" . self::APIKEY;
+
         $output = file_get_contents($query);
 
         return $output;
