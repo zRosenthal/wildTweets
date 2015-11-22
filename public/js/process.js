@@ -1,4 +1,4 @@
-function process(count) {
+function process() {
     var query = document.getElementById("query").value;
 
 
@@ -6,7 +6,7 @@ function process(count) {
 
     dates = getCurrentDate();
 
-    for(var i = 0; i<7; i++) {
+    for(var i = 0; i<3; i++) {
 
         console.log(dates[i]);
         console.log(dates[i+1]);
@@ -36,7 +36,7 @@ function makeRequest(query,date1, date2) {
             }
 
         }
-    })
+    }).success(makeRequest())
 
 }
 
