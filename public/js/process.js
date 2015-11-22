@@ -36,7 +36,7 @@ function makeRequest(query,date1, date2) {
             }
 
         }
-    }).success(makeRequest())
+    });
 
 }
 
