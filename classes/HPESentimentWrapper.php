@@ -36,7 +36,7 @@ class HPESentimentWrapper {
     public function GetSentimentValue($text)
     {
         $json = json_decode(self::GetSentimentJson($text));
-        echo json_decode($json) . "<br><br>";
+        echo json_encode($json) . "<br><br>";
         $aggregate = $json->aggregate;
         return json_encode($aggregate->score);
     }
