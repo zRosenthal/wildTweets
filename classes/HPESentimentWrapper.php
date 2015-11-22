@@ -10,10 +10,14 @@ class HPESentimentWrapper {
 
     const APIKEY = "83689e9e-10df-4519-a0bc-071a206dd25b";
 
+    private function stripText($text)
+    {
+    }
+
     public function GetSentimentJson($text)
     {
         $correctText = str_replace(" ","+",$text);
-        $correctText = urlencode($correctText);
+        $correctText = iconv("UTF-8", "UTF-8//IGNORE", $correctText)
         $query = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text="
                     . $correctText . "&language=eng&apikey=" . self::APIKEY;
         echo $query;
