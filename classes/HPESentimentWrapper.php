@@ -45,6 +45,7 @@ class HPESentimentWrapper {
         $sum = 0;
         foreach($tweets as $twat)
         {
+            echo $twat;
             $sum = $sum + floatval(self::GetSentimentValue($twat));
         }
         return $sum/sizeof($tweets);
