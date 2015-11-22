@@ -21,7 +21,6 @@ class HPESentimentWrapper {
         $correctText = preg_replace("/[^a-zA-Z0-9+]/", "", $correctText);
         $query = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text="
                     . $correctText . "&language=eng&apikey=" . self::APIKEY;
-        echo $query;
         // create curl resource
         $ch = curl_init();
 
@@ -43,7 +42,6 @@ class HPESentimentWrapper {
     public function GetSentimentValue($text)
     {
         $json = json_decode(self::GetSentimentJson($text));
-        echo json_encode($json) . "<br><br>";
         $aggregate = $json->aggregate;
         return json_encode($aggregate->score);
     }
