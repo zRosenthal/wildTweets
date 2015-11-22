@@ -66,10 +66,8 @@ function animateInit(monkey, twitter, hp, text) {
                     left: "+="+left,
                     top: "+="+top
                 }, 4000, function() {
-
                     hp.hide();
 
-                    text.hide();
 
                     var monkeyH = monkey.height();
 
@@ -88,12 +86,18 @@ function animateInit(monkey, twitter, hp, text) {
 
                     monkey.css('z-index', -1);
 
-                    monkey.animate({
+                    monkey.attr("src","img/monkey2.png");
+
+                    text.html("stuck at hpE - smokes if you got em");
+
+                    monkey.delay(2500).animate({
                         width: "+="+W,
                         height: "+="+H,
                         left: "-="+monkeyPosition.left,
                         top: "-="+monkeyPosition.top
                     }, 4000, function() {
+
+                        monkey.attr("src","img/monkey.jpg");
 
                         text.html("Space Cat is crunching the data");
 

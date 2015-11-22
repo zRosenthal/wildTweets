@@ -49,6 +49,9 @@ class HPESentimentWrapper {
             }
             $sum = $sum + $sentimentVal;
         }
-        return $sum/$size;
+        if(!$size) {
+            return 0;
+        }
+        return  $sum/$size;
     }
 }
