@@ -21,13 +21,20 @@ function process(count) {
         url: '/process/'+ query +'/'+ count,
         method: 'get',
         success: function (data) {
-            $("#cat_text").hide();
-            dataH.show();
             console.log(data);
-            //dataH.html(data);
-            bargraph(data);
-        }
+            if (parseFloat(data) == dataSpace.data) {
+                console.log("do nothing");
+            }
+            else {
+                dataSpace.data = data;
+                $("#cat_text").hide();
+                dataH.show();
+                console.log(data);
+                //dataH.html(data);
+                bargraph(data);
+            }
 
+        }
     })
 }
 function queueFlyingMonkey() {
