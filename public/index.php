@@ -1,6 +1,7 @@
 <?php
 require '../vendor/autoload.php';
 require '../public/TwitterRequest.php';
+require '../public/HPESentimentWrapper.php';
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -45,10 +46,12 @@ $app->get('/callback', function () use ($app) {
 
 $app->get('/app', function () use ($app) {
 
-    $twitter = new TwitterRequest();
-    $app->log->info(json_encode($twitter));
-    $return = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent'));
-    $app->log->info(json_encode($return));
+    $HPE = new HPESentimentWrapper();
+    echo $HPE->GetSentimentJson("I really fucking hate my mother");
+//    $twitter = new TwitterRequest();
+//    $app->log->info(json_encode($twitter));
+//    $return = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent'));
+//    $app->log->info(json_encode($return));
 });
 
 

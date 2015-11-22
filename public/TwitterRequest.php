@@ -29,12 +29,13 @@ class TwitterRequest {
         //get
         $oauth_token=$request_token->access_token;
 
-        $this->$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, null, $oauth_token);
+        $this->connection = new TwitterOAuth(self::CONSUMER_KEY, self::CONSUMER_SECRET, null, $oauth_token);
     }
+
 
     function requestTweet($query,$args)
     {
-        $result = $this->$connection->get($query, $args);
+        $result = $this->connection->get($query, $args);
         return $result;
     }
-} 
+}
