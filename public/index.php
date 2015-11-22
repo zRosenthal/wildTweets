@@ -41,9 +41,13 @@ $app->get('/', function () use ($app) {
 $app->get('/process/:keyword', function ($keyword) use ($app) {
     $twitter = new TwitterRequest();
     $tweets = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent', 'count' => 2));
+    foreach($tweets as $twat)
+    {
+        echo $twat . "<br><br>";
+    }
     $sentimentAnalyzer = new HPESentimentWrapper();
     $sentimentAverage = $sentimentAnalyzer->GetSetimentAverageForTweets($tweets);
-    $app->log->info($sentimentAverage . "Number of tweets: " . sizeof($tweets));
+
 
 });
 
