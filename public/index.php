@@ -37,10 +37,10 @@ $app->get('/', function () use ($app) {
 });
 
 
-$app->get('/process/:keyword/:date1/:date2', function ($keyword, $date1,$date2) use ($app) {
+$app->get('/process/:keyword/:date1/:date2/:rt', function ($keyword, $date1,$date2, $rt) use ($app) {
     $app->log->info("here");
     $twitter = new TwitterRequest();
-    $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword  -http -filter:retweets -filter:links -filter:replies -filter:images since:$date1 until:$date2 lang:en", 'request_type'=> 'popular','count' => 20, 'exclude_replies' => true));
+    $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword  -http -filter:retweets -filter:links -filter:replies -filter:images since:$date1 until:$date2 lang:en", 'request_type'=> $rt,'count' => 20, 'exclude_replies' => true));
     $app->log->info("got tweets");
 
     $sentimentAnalyzer = new HPESentimentWrapper();

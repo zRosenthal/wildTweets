@@ -24,7 +24,7 @@ function process() {
 function makeRequest(query,date1, date2) {
 
     $.ajax({
-        url: '/process/'+ query +'/'+ date1 + '/' + date2,
+        url: '/process/'+ query +'/'+ date1 + '/' + date2 + '/' + $('#rt').val(),
         method: 'get',
         success: function (data) {
             console.log(data);
