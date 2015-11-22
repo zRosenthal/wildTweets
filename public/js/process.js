@@ -5,12 +5,9 @@ function process(count) {
         console.log(count);
         process(60);
         queueFlyingMonkey();
-    } else if(count == 60) {
+    } else if(count < 200) {
         console.log(count);
-        process(120);
-    } else if(count == 120) {
-        console.log(count);
-        process(200);
+        process(count + 10);
     }
 
 
