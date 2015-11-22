@@ -57,7 +57,7 @@ $app->get('/twitterTest', function () use ($app) {
 
     // close curl resource to free up system resources
     curl_close($ch);
-    echo json_encode($output);
+    echo $output;
 
 });
 
