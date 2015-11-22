@@ -1,4 +1,11 @@
 function bargraph($data) {
+    $val = parseFloat($data);
+    if($val<0)
+    {
+        $color = '#FF0000';
+    }
+    else
+        $color = '#FFFF00';
     // Age categories
     console.log("in");
     var categories = ['a'];
@@ -35,9 +42,14 @@ function bargraph($data) {
                 }
             },
 
+            colors : [$color],
+
             plotOptions: {
                 series: {
                     stacking: 'normal'
+                },
+                column: {
+                    colorByPoint: true
                 }
             },
 
@@ -50,7 +62,7 @@ function bargraph($data) {
 
             series: [{
                 name: 'Sentiment',
-                data: [parseFloat($data)*100]
+                data: [$val*100]
 
             }]
         });
