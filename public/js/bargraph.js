@@ -5,7 +5,7 @@ function bargraph($data) {
         $color = '#FF0000';
     }
     else
-        $color = '#FFFF00';
+        $color = '#0f990f';
     // Age categories
     console.log("in");
     var categories = ['a'];
