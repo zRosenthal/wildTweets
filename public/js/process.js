@@ -1,8 +1,11 @@
 function process() {
     var query = document.getElementById("query").value;
 
+    dataSpace.first = 1;
+    bargraph();
+    $('#bar-graph').hide();
 
-    //var dataH = $('#display_header');
+    queueFlyingMonkey();
 
     dates = getCurrentDate();
 
@@ -11,6 +14,7 @@ function process() {
         console.log(dates[i]);
         console.log(dates[i+1]);
         makeRequest(query, dates[i],dates[i+1]);
+
 
     }
 
@@ -24,17 +28,18 @@ function makeRequest(query,date1, date2) {
         method: 'get',
         success: function (data) {
             console.log(data);
-            if (parseFloat(data) == dataSpace.data) {
-                console.log("do nothing");
-            }
-            else {
+                if(dataSpace.first) {
+                $('#bar-graph').show();
+                    bargraph();
+                    dataSpace.first = 0;
+                    $('#monkey').css('z-index','-1 !important');
+                }
                 dataSpace.data = data;
                 $("#cat_text").hide();
                 console.log(data);
                 //dataH.html(data);
-                addPoint(data);
+                addPoint(parseFloat(data));
 
-            }
 
         }
     });

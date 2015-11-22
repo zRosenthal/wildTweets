@@ -10,9 +10,6 @@ class HPESentimentWrapper {
 
     const APIKEY = "83689e9e-10df-4519-a0bc-071a206dd25b";
 
-    private function stripText($text)
-    {
-    }
 
     public function GetSentimentJson($text)
     {

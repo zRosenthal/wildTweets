@@ -1,5 +1,5 @@
 function bargraph($data) {
-    var val = parseFloat($data);
+    var val = 0;
     if(val<0)
     {
         $color = '#FF0000';
