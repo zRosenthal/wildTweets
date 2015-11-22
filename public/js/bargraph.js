@@ -1,7 +1,7 @@
 function bargraph($data) {
     // Age categories
     console.log("in");
-    var categories = ['0-4'];
+    var categories = ['a'];
         $('#bar-graph').highcharts({
             chart: {
                 type: 'bar'
@@ -50,7 +50,8 @@ function bargraph($data) {
 
             series: [{
                 name: 'Negative',
-                data: [-90]
+                data: [parseFloat($data)*100]
+
             }]
         });
 
