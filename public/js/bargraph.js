@@ -1,6 +1,6 @@
 function bargraph($data) {
-    $val = parseFloat($data);
-    if($val<0)
+    var val = parseFloat($data);
+    if(val<0)
     {
         $color = '#FF0000';
     }
@@ -62,7 +62,7 @@ function bargraph($data) {
 
             series: [{
                 name: 'Sentiment',
-                data: [$val*100]
+                data: [val*100]
 
             }]
         });

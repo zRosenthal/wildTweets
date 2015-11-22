@@ -2,20 +2,20 @@ function process(count) {
     var query = document.getElementById("query").value;
 
 
-    var dataH = $('#display_header');
+    //var dataH = $('#display_header');
 
     dates = getCurrentDate();
 
     for(var i = 0; i<7; i++) {
 
-        makeRequest(dates[i],dates[i+1]);
+        makeRequest(query, dates[i],dates[i+1]);
 
     }
 
 }
 
 
-function makeRequest(date1, date2) {
+function makeRequest(query,date1, date2) {
 
     $.ajax({
         url: '/process/'+ query +'/'+ date1 + '/' + date2,

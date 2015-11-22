@@ -41,6 +41,8 @@ $app->get('/process/:keyword/:date1/:date2', function ($keyword, $date1,$date2) 
     $app->log->info("here");
     $twitter = new TwitterRequest();
     $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword  -http -filter:retweets -filter:links -filter:replies -filter:images since:$date1 until:$date2 lang:en", 'count' => 34, 'exclude_replies' => true));
+    $app->log->info("got tweets");
+
     $sentimentAnalyzer = new HPESentimentWrapper();
     $sentimentAverage = $sentimentAnalyzer->GetSentimentAverageForTweets($tweets);
     $app->log->info("sentimentDone: " .$sentimentAverage);
