@@ -7,24 +7,20 @@ function process() {
 
     queueFlyingMonkey();
 
-    dates = getCurrentDate();
+   dataSpace.dates = getCurrentDate();
 
-    for(var i = 0; i<7; i++) {
-
-        console.log(dates[i]);
-        console.log(dates[i+1]);
-        makeRequest(query, dates[i],dates[i+1]);
+    makeRequest(query);
 
 
-    }
+
 
 }
 
 
-function makeRequest(query,date1, date2) {
+function makeRequest(query) {
 
     $.ajax({
-        url: '/process/'+ query +'/'+ date1 + '/' + date2 + '/' + $('#rt').val(),
+        url: '/process/'+ query +'/'+ dataSpace.dates[dataSpace.i] + '/' + dataSpace.dates[dataSpace.i +1] + '/' + $('#rt').val(),
         method: 'get',
         success: function (data) {
             console.log(data);
@@ -34,12 +30,14 @@ function makeRequest(query,date1, date2) {
                     dataSpace.first = 0;
                     $('#monkey').css('z-index','-1 !important');
                 }
-                dataSpace.data = data;
                 $("#cat_text").hide();
                 console.log(data);
                 //dataH.html(data);
-                addPoint(parseFloat(data),date1);
-
+                addPoint(parseFloat(data),dataSpace.dates[dataSpace.i]);
+                dataSpace.i++;
+                if(dataSpace.i < 7) {
+                    makeRequest(query);
+                }
 
         }
     });
