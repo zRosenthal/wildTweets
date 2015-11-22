@@ -6,7 +6,7 @@ function process() {
 
     dates = getCurrentDate();
 
-    for(var i = 0; i<1; i++) {
+    for(var i = 0; i<7; i++) {
 
         console.log(dates[i]);
         console.log(dates[i+1]);
@@ -32,12 +32,16 @@ function makeRequest(query,date1, date2) {
                 $("#cat_text").hide();
                 console.log(data);
                 //dataH.html(data);
-                bargraph(data);
+                addPoint(data);
+
             }
 
         }
     });
 
+}
+function addPoint(data) {
+    $('#bar-graph').highcharts().series[0].addPoint(data);
 }
 
 function getCurrentDate() {
