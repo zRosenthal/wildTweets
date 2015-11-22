@@ -17,7 +17,6 @@ class HPESentimentWrapper {
     public function GetSentimentJson($text)
     {
         $correctText = str_replace(" ","+",$text);
-        $correctText = iconv("UTF-8", "UTF-8//IGNORE", $correctText);
         $correctText = preg_replace("/[^a-zA-Z0-9+]/", "", $correctText);
         $query = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text="
                     . $correctText . "&language=eng&apikey=" . self::APIKEY;
