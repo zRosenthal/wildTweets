@@ -36,6 +36,7 @@ class HPESentimentWrapper {
     public function GetSentimentValue($text)
     {
         $json = json_decode(self::GetSentimentJson($text));
+        echo $json . "<br><br>";
         $aggregate = $json->aggregate;
         return json_encode($aggregate->score);
     }
@@ -45,7 +46,6 @@ class HPESentimentWrapper {
         $sum = 0;
         foreach($tweets as $twat)
         {
-            echo $twat;
             $sum = $sum + floatval(self::GetSentimentValue($twat));
         }
         return $sum/sizeof($tweets);
