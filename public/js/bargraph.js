@@ -7,10 +7,7 @@ function bargraph($data) {
                 type: 'bar'
             },
             title: {
-                text: 'Population pyramid for Germany, 2015'
-            },
-            subtitle: {
-                text: 'Source: <a href="http://populationpyramid.net/germany/2015/">Population Pyramids of the World from 1950 to 2100</a>'
+                text: 'Sentiment of data based on recent Twitter posts'
             },
             xAxis: [{
                 categories: categories,
@@ -53,7 +50,7 @@ function bargraph($data) {
 
             series: [{
                 name: 'Positive',
-                data: [-2.2]
+                data: []
             }, {
                 name: 'Negative',
                 data: [2.1]
