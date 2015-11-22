@@ -1,6 +1,7 @@
 function process(count) {
     var query = document.getElementById("query").value;
 
+
     var dataH = $('#display_header');
 
     dates = getCurrentDate();
