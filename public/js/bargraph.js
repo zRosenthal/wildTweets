@@ -1,16 +1,13 @@
 function bargraph($data) {
     // Age categories
     console.log("in");
-    var categories = ['0-4'];
+    var categories = ['a'];
         $('#bar-graph').highcharts({
             chart: {
                 type: 'bar'
             },
             title: {
-                text: 'Population pyramid for Germany, 2015'
-            },
-            subtitle: {
-                text: 'Source: <a href="http://populationpyramid.net/germany/2015/">Population Pyramids of the World from 1950 to 2100</a>'
+                text: 'Sentiment of data based on recent Twitter posts'
             },
             xAxis: [{
                 categories: categories,
@@ -20,7 +17,7 @@ function bargraph($data) {
                 }
             }, { // mirror axis on right side
                 opposite: true,
-                reversed: false,
+                reversed: true,
                 categories: categories,
                 linkedTo: 0,
                 labels: {
@@ -52,11 +49,9 @@ function bargraph($data) {
             },
 
             series: [{
-                name: 'Positive',
-                data: [-2.2]
-            }, {
-                name: 'Negative',
-                data: [2.1]
+                name: 'Sentiment',
+                data: [parseFloat($data)*100]
+
             }]
         });
 
