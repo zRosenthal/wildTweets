@@ -49,7 +49,7 @@ function bargraph($data) {
             },
 
             series: [{
-                name: 'Negative',
+                name: 'Sentiment',
                 data: [parseFloat($data)*100]
 
             }]
