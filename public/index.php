@@ -41,11 +41,7 @@ $app->get('/', function () use ($app) {
 
 $app->get('/twitterTest', function () use ($app) {
 
-    $twitter = new TwitterRequest();
-    $app->log->info(json_encode($twitter));
-    $tweets = $twitter->requestTweet('search/tweets', array('q' => 'spartan', 'result_type' => 'recent', 'count' => 2));
-
-    echo json_encode($tweets);
+    echo "works bitch";
 
 });
 
