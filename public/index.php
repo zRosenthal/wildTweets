@@ -42,7 +42,7 @@ $app->get('/', function () use ($app) {
 $app->get('/twitterTest', function () use ($app) {
 
 
-    $query = 'https://google.com';
+    $query = 'https://www.google.com';
     // create curl resource
     $ch = curl_init();
 
