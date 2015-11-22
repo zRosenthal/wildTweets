@@ -51,10 +51,15 @@ class HPESentimentWrapper {
     public function GetSentimentAverageForTweets($tweets)
     {
         $sum = 0;
+        $size = sizeof($tweets);
         foreach($tweets as $twat)
         {
+            if(floatval(self::GetSentimentValue($twat)) == 0)
+            {
+                $size = $size-1;
+            }
             $sum = $sum + floatval(self::GetSentimentValue($twat));
         }
-        return $sum/sizeof($tweets);
+        return $sum/$size;
     }
 }
