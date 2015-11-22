@@ -46,7 +46,7 @@ $app->get('/process/:keyword', function ($keyword) use ($app) {
         echo $twat . "<br><br>";
     }
     $sentimentAnalyzer = new HPESentimentWrapper();
-    $sentimentAverage = $sentimentAnalyzer->GetSetimentAverageForTweets($tweets);
+    $sentimentAverage = $sentimentAnalyzer->GetSentimentAverageForTweets($tweets);
     echo $sentimentAverage;
 
 });
