@@ -16,7 +16,8 @@ function process() {
             $("#cat_text").hide();
             dataH.show();
             console.log(data);
-            dataH.html(data);
+            //dataH.html(data);
+            bargraph(data);
 
         }
 

@@ -1,52 +1,70 @@
-/**
- * Created by rosent76 on 11/22/15.
- */
-var margin = {top: 30, right: 10, bottom: 10, left: 10},
-width = 960 - margin.left - margin.right,
-height = 500 - margin.top - margin.bottom;
+function bargraph($data) {
+    // Age categories
+    var categories = ['0-4', '5-9', '10-14', '15-19',
+        '20-24', '25-29', '30-34', '35-39', '40-44',
+        '45-49', '50-54', '55-59', '60-64', '65-69',
+        '70-74', '75-79', '80-84', '85-89', '90-94',
+        '95-99', '100 + '];
+        $('#bar-graph').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Population pyramid for Germany, 2015'
+            },
+            subtitle: {
+                text: 'Source: <a href="http://populationpyramid.net/germany/2015/">Population Pyramids of the World from 1950 to 2100</a>'
+            },
+            xAxis: [{
+                categories: categories,
+                reversed: false,
+                labels: {
+                    step: 1
+                }
+            }, { // mirror axis on right side
+                opposite: true,
+                reversed: false,
+                categories: categories,
+                linkedTo: 0,
+                labels: {
+                    step: 1
+                }
+            }],
+            yAxis: {
+                title: {
+                    text: null
+                },
+                labels: {
+                    formatter: function () {
+                        return Math.abs(this.value) + '%';
+                    }
+                }
+            },
 
-var x = d3.scale.linear()
-.range([0, width]);
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
 
-var y = d3.scale.ordinal()
-.rangeRoundBands([0, height], .2);
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
+                    'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                }
+            },
 
-var xAxis = d3.svg.axis()
-.scale(x)
-.orient("top");
+            series: [{
+                name: 'Positive',
+                data: [-2.2, -2.2, -2.3, -2.5, -2.7, -3.1, -3.2,
+                    -3.0, -3.2, -4.3, -4.4, -3.6, -3.1, -2.4,
+                    -2.5, -2.3, -1.2, -0.6, -0.2, -0.0, -0.0]
+            }, {
+                name: 'Negative',
+                data: [2.1, 2.0, 2.2, 2.4, 2.6, 3.0, 3.1, 2.9,
+                    3.1, 4.1, 4.3, 3.6, 3.4, 2.6, 2.9, 2.9,
+                    1.8, 1.2, 0.6, 0.1, 0.0]
+            }]
+        });
 
-var svg = d3.select("body").append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
-.append("g")
-.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-d3.tsv("data.tsv", type, function(error, data) {
-    x.domain(d3.extent(data, function(d) { return d.value; })).nice();
-    y.domain(data.map(function(d) { return d.name; }));
-
-    svg.selectAll(".bar")
-    .data(data)
-    .enter().append("rect")
-    .attr("class", function(d) { return d.value < 0 ? "bar negative" : "bar positive"; })
-    .attr("x", function(d) { return x(Math.min(0, d.value)); })
-    .attr("y", function(d) { return y(d.name); })
-    .attr("width", function(d) { return Math.abs(x(d.value) - x(0)); })
-    .attr("height", y.rangeBand());
-
-    svg.append("g")
-    .attr("class", "x axis")
-    .call(xAxis);
-
-    svg.append("g")
-    .attr("class", "y axis")
-    .append("line")
-    .attr("x1", x(0))
-    .attr("x2", x(0))
-    .attr("y2", height);
-    });
-
-function type(d) {
-    d.value = +d.value;
-    return d;
-    }
+}
