@@ -1,7 +1,7 @@
 <?php
 require '../vendor/autoload.php';
-require '../public/TwitterRequest.php';
-require '../public/HPESentimentWrapper.php';
+require '../classes/TwitterRequest.php';
+require '../classes/HPESentimentWrapper.php';
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
@@ -13,7 +13,7 @@ $app = new \Slim\Slim(array(
 // Create monolog logger and store logger in container as singleton
 // (Singleton resources retrieve the same log resource definition each time)
 $app->container->singleton('log', function () {
-    $log = new \Monolog\Logger('slim-skeleton');
+    $log = new \Monolog\Logger('wildTweets');
     $log->pushHandler(new \Monolog\Handler\StreamHandler('../logs/app.log', \Monolog\Logger::DEBUG));
     return $log;
 });
@@ -37,29 +37,15 @@ $app->get('/', function () use ($app) {
     $app->render('index.html');
 });
 
-$app->get('/callback', function () use ($app) {
 
-    $app->log->info("here");
-
-});
 
 $app->get('/twitterTest', function () use ($app) {
 
     $twitter = new TwitterRequest();
     $app->log->info(json_encode($twitter));
-    $result = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent', 'count' => 2));
+    $tweets = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent', 'count' => 2));
 
-    $statuses = $result->statuses;
-
-
-
-
-    foreach ($statuses as $elm) {
-
-
-       echo urldecode($elm->text) . "<br><br>";
-    }
-
+    echo json_encode($tweets);
 
 });
 
