@@ -30,7 +30,6 @@ function makeRequest(query,date1, date2) {
             else {
                 dataSpace.data = data;
                 $("#cat_text").hide();
-                dataH.show();
                 console.log(data);
                 //dataH.html(data);
                 bargraph(data);
