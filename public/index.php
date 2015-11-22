@@ -38,28 +38,14 @@ $app->get('/', function () use ($app) {
 });
 
 
-
-$app->get('/twitterTest', function () use ($app) {
-
+$app->get('/process/:keyword', function ($keyword) use ($app) {
     $twitter = new TwitterRequest();
-    $app->log->info(json_encode($twitter));
-    $tweets = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent', 'count' => 2));
-
-    echo json_encode($tweets);
-
-});
-
-$app->get('/sentimentTest', function () use ($app) {
-
-    $HPE = new HPESentimentWrapper();
-
-    $vala = $HPE->GetSentimentValue("I really fucking hate my mother");
-    $valb = $HPE->GetSentimentValue("I really love my mother");
-    echo $vala. " " . $valb . "<br>".($vala+$valb)/2;
+    $tweets = $twitter->requestTweet('search/tweets', array('q' => "$keyword  -http -filter:retweets -filter:links -filter:replies -filter:images lang:en", 'result_type' => 'recent', 'count' => 20, 'exclude_replies' => true));
+    $sentimentAnalyzer = new HPESentimentWrapper();
+    $sentimentAverage = $sentimentAnalyzer->GetSentimentAverageForTweets($tweets);
+    echo $sentimentAverage;
 
 });
-
-
 
 // Run app
 $app->run();
