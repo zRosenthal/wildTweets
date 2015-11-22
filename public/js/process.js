@@ -8,6 +8,8 @@ function process(count) {
 
     for(var i = 0; i<7; i++) {
 
+        console.log(dates[i]);
+        console.log(dates[i+1]);
         makeRequest(query, dates[i],dates[i+1]);
 
     }
