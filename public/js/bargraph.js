@@ -17,7 +17,7 @@ function bargraph($data) {
                 }
             }, { // mirror axis on right side
                 opposite: true,
-                reversed: false,
+                reversed: true,
                 categories: categories,
                 linkedTo: 0,
                 labels: {
