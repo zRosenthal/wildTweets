@@ -43,15 +43,31 @@ $app->get('/callback', function () use ($app) {
 
 });
 
+$app->get('/twitterTest', function () use ($app) {
 
-$app->get('/app', function () use ($app) {
+    $twitter = new TwitterRequest();
+    $app->log->info(json_encode($twitter));
+    $result = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent', 'count' => 2));
+
+    $statuses = $result->statuses;
+
+
+
+
+    foreach ($statuses as $elm) {
+
+
+       echo urldecode($elm->text) . "<br><br>";
+    }
+
+
+});
+
+$app->get('/sentimentTest', function () use ($app) {
 
     $HPE = new HPESentimentWrapper();
     echo $HPE->GetSentimentJson("I really fucking hate my mother");
-//    $twitter = new TwitterRequest();
-//    $app->log->info(json_encode($twitter));
-//    $return = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent'));
-//    $app->log->info(json_encode($return));
+
 });
 
 
