@@ -13,6 +13,7 @@ class HPESentimentWrapper {
     public function GetSentimentJson($text)
     {
         $correctText = str_replace(" ","+",$text);
+        $correctText = urlencode($correctText);
         $query = "https://api.havenondemand.com/1/api/sync/analyzesentiment/v1?text="
                     . $correctText . "&language=eng&apikey=" . self::APIKEY;
         echo $query;
