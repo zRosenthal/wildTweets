@@ -47,27 +47,5 @@ $app->get('/process/:keyword', function ($keyword) use ($app) {
 
 });
 
-$app->get('/twitterTest', function () use ($app) {
-
-    $twitter = new TwitterRequest();
-    $app->log->info(json_encode($twitter));
-    $tweets = $twitter->requestTweet('search/tweets', array('q' => 'superbowl', 'result_type' => 'recent', 'count' => 2));
-
-    echo json_encode($tweets);
-
-});
-
-$app->get('/sentimentTest', function () use ($app) {
-
-    $HPE = new HPESentimentWrapper();
-
-    $vala = $HPE->GetSentimentValue("I really fucking hate my mother");
-    $valb = $HPE->GetSentimentValue("I really love my mother");
-    echo $vala. " " . $valb . "<br>".($vala+$valb)/2;
-
-});
-
-
-
 // Run app
 $app->run();
